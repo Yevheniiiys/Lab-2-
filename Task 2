@@ -1,0 +1,93 @@
+using System;
+
+public class Point
+{
+    private double x;
+    private double y;
+    private string name;
+
+    public double X 
+    { 
+        get { return x; }
+    }
+    
+    public double Y 
+    { 
+        get { return y; }
+    }
+    
+    public string Name 
+    { 
+        get { return name; }
+    }
+
+    public Point(double x, double y, string name)
+    {
+        this.x = x;
+        this.y = y;
+        this.name = name;
+    }
+}
+
+public class Figure
+{
+    private Point[] points;
+
+    public Figure(params Point[] points)
+    {
+        this.points = points;
+    }
+
+    private double GetSideLength(Point A, Point B)
+    {
+        return Math.Sqrt(Math.Pow(B.X - A.X, 2) + Math.Pow(B.Y - A.Y, 2));
+    }
+
+    public void CalculatePerimeter()
+    {
+        double perimeter = 0;
+        for (int i = 0; i < points.Length; i++)
+        {
+            perimeter += GetSideLength(points[i], points[(i + 1) % points.Length]);
+        }
+        Console.WriteLine("Периметр: " + perimeter);
+    }
+
+    public void PrintFigureDetails()
+    {
+        string figureName = "";
+        if (points.Length == 3)
+        {
+            figureName = "Трикутник";
+        }
+        else if (points.Length == 4)
+        {
+            figureName = "Чотирикутник";
+        }
+        else if (points.Length == 5)
+        {
+            figureName = "П’ятикутник";
+        }
+        else
+        {
+            figureName = "Невідомий багатокутник";
+        }
+
+        Console.WriteLine("Назва: " + figureName);
+        CalculatePerimeter();
+    }
+}
+
+public class Program
+{
+    public static void Main()
+    {
+        var A = new Point(0, 0, "A");
+        var B = new Point(4, 0, "B");
+        var C = new Point(4, 3, "C");
+        var D = new Point(0, 3, "D");
+
+        var quadrilateral = new Figure(A, B, C, D);
+        quadrilateral.PrintFigureDetails();
+    }
+}
