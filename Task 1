@@ -1,0 +1,58 @@
+using System;
+
+public class Rectangle
+{
+    private double side1;
+    private double side2;
+
+    // Власний конструктор
+    public Rectangle(double side1, double side2)
+    {
+        this.side1 = side1;
+        this.side2 = side2;
+    }
+
+    // Метод для обчислення площі
+    public double CalculateArea()
+    {
+        return side1 * side2;
+    }
+
+    // Метод для обчислення периметра
+    public double CalculatePerimeter()
+    {
+        return 2 * (side1 + side2);
+    }
+
+    // Властивість для площі
+    public double Area
+    {
+        get { return CalculateArea(); }
+    }
+
+    // Властивість для периметра
+    public double Perimeter
+    {
+        get { return CalculatePerimeter(); }
+    }
+}
+
+public class Program
+{
+    public static void Main()
+    {
+        // Введення користувачем довжин сторін прямокутника
+        Console.Write("Введіть довжину першої сторони прямокутника: ");
+        double side1 = Convert.ToDouble(Console.ReadLine());
+
+        Console.Write("Введіть довжину другої сторони прямокутника: ");
+        double side2 = Convert.ToDouble(Console.ReadLine());
+
+        // Створення об'єкта прямокутника
+        Rectangle rectangle = new Rectangle(side1, side2);
+
+        // Виведення площі та периметра
+        Console.WriteLine("Площа прямокутника: " + rectangle.Area);
+        Console.WriteLine("Периметр прямокутника: " + rectangle.Perimeter);
+    }
+}
